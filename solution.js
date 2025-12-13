@@ -11,8 +11,10 @@ console.log([...seq]);
 
 // second:
 function* permutationOfPair(array) {
-  for (let index = 0; index < array.length - 1; index++) {
-    yield array.slice(index).map((num) => [array[index], num]);
+  for (let row = 0; row < array.length - 1; row++) {
+    for (let col = row; col < array.length; col++) {
+      yield [array[row], array[col]];
+    }
   }
 }
 const permutation = permutationOfPair([1, 2, 3, 4, 5]);
@@ -34,3 +36,20 @@ const numCycle = cycler.take(10);
 console.log([...numCycle]);
 
 //Forth :
+function* iteratorOverLines(string) {
+  let i = 0;
+  while (i < string.length) {
+    let newLine = string.indexOf("\n", i);
+    if (newLine === -1) {
+      yield string.slice(i);
+      break;
+    }
+    yield string.slice(i, newLine);
+    i = newLine + 1;
+  }
+}
+
+const goOverLines = iteratorOverLines("this\nis\ngood");
+console.log([...goOverLines]);
+
+//fifth
