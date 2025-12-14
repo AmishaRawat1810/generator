@@ -31,8 +31,8 @@ function* cycler(array) {
     }
   }
 }
-const cycler = generator([1, 2, 3, 4, 5]);
-const numCycle = cycler.take(10);
+const numberCycler = cycler([1, 2, 3, 4, 5]);
+const numCycle = numberCycler.take(10);
 console.log([...numCycle]);
 
 //Forth :
@@ -53,3 +53,25 @@ const goOverLines = iteratorOverLines("this\nis\ngood");
 console.log([...goOverLines]);
 
 //fifth
+function* partitionBy(array, predicate) {
+  let i = 0;
+  while (i < array.length) {
+    let flag = predicate(array[i], array[i]);
+    let result = [array[i]];
+    let j = i + 1;
+    while (flag === predicate(array[j], array[i]) && j < array.length) {
+      result.push(array[j]);
+      j++;
+    }
+    yield result;
+    i = j;
+  }
+}
+const isEven = (el1) => !(el1 & 1);
+const isIdentity = (num1, num2) => num1 === num2;
+
+const input = [1, 1, 1, 2, 4, 2, 1, 5, 7, 7];
+const partitionByEven = partitionBy(input, isEven);
+const partitionByIdentity = partitionBy(input, isIdentity);
+console.log([...partitionByEven]);
+console.log([...partitionByIdentity]);
