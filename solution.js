@@ -75,3 +75,23 @@ const partitionByEven = partitionBy(input, isEven);
 const partitionByIdentity = partitionBy(input, isIdentity);
 console.log([...partitionByEven]);
 console.log([...partitionByIdentity]);
+
+//sixth
+const isPrime = (number) => {
+  let i = 2;
+  let count = 1;
+  while (i <= Math.sqrt(number)) {
+    if (number % i === 0) count++;
+    i++;
+  }
+  return count === 1;
+};
+function* primeSeries() {
+  let num = 1;
+  while (true) {
+    if (isPrime(num)) yield num;
+    num++;
+  }
+}
+const primes = primeSeries();
+console.log([...primes.take(10)]);
