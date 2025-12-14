@@ -120,3 +120,15 @@ function* chunksOf(array, size, move = 0) {
 const chunkOf2_0 = chunksOf([1, 2, 3, 4], 2);
 const chunkOf3_1 = chunksOf([1, 2, 3, 4, 5], 3, 1);
 const chunkOf3_2 = chunksOf([1, 2, 3, 4, 5], 3, 2);
+
+//ninth
+function* iterateFunction(fn, value) {
+  let fx = fn(value);
+  while (true) {
+    yield fx;
+    fx = fn(fx);
+  }
+}
+const addTwo = (num) => num + 2;
+const itr = iterateFunction(addTwo, 1);
+console.log([...itr.take(10)]);
