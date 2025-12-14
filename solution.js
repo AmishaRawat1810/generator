@@ -95,3 +95,28 @@ function* primeSeries() {
 }
 const primes = primeSeries();
 console.log([...primes.take(10)]);
+
+//seventh
+function* flipPairs(array) {
+  let i = 1;
+  while (i < array.length) {
+    yield [array[i], array[i - 1]];
+    i += 2;
+  }
+}
+const flipped = flipPairs([1, 2, 3, 4]);
+console.log([...flipped]);
+
+//eigth
+function* chunksOf(array, size, move = 0) {
+  for (let i = 0; i < array.length; i += size - move) {
+    const chunk = [];
+    for (let j = 0; j < size; j++) {
+      if (array[j + i] !== undefined) chunk.push(array[j + i]);
+    }
+    yield chunk;
+  }
+}
+const chunkOf2_0 = chunksOf([1, 2, 3, 4], 2);
+const chunkOf3_1 = chunksOf([1, 2, 3, 4, 5], 3, 1);
+const chunkOf3_2 = chunksOf([1, 2, 3, 4, 5], 3, 2);
