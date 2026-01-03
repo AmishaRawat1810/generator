@@ -24,18 +24,15 @@ console.log([...permutation]);
 function* cycler(array) {
   let i = 0;
   while (true) {
-    yield array[i];
+    yield array[i % array.length];
     i++;
-    if (i === array.length) {
-      i = 0;
-    }
   }
 }
 const numberCycler = cycler([1, 2, 3, 4, 5]);
 const numCycle = numberCycler.take(10);
 console.log([...numCycle]);
 
-//Forth :
+//Fourth :
 function* iteratorOverLines(string) {
   let i = 0;
   while (i < string.length) {
@@ -108,8 +105,8 @@ const flipped = flipPairs([1, 2, 3, 4]);
 console.log([...flipped]);
 
 //eigth
-function* chunksOf(array, size, move = 0) {
-  for (let i = 0; i < array.length; i += size - move) {
+function* chunksOf(array, size, overlapCount = 0) {
+  for (let i = 0; i < array.length; i += size - overlapCount) {
     const chunk = [];
     for (let j = 0; j < size; j++) {
       if (array[j + i] !== undefined) chunk.push(array[j + i]);
